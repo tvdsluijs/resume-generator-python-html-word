@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CV - {{ basics.name }}</title>
+        <meta name="description" content="{{ basics.summary[:160] }}" />
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                width: 80%;
+                margin: auto;
+                overflow: hidden;
+            }
+            header {
+                background: #333;
+                color: #fff;
+                padding-top: 30px;
+                min-height: 70px;
+                border-bottom: #77a6f7 3px solid;
+            }
+            header a {
+                color: #fff;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 16px;
+            }
+            header ul {
+                padding: 0;
+                list-style: none;
+            }
+            header li {
+                float: left;
+                display: inline;
+                padding: 0 20px 0 20px;
+            }
+            .main-header {
+                text-align: center;
+                background: #5d6d7e;
+                color: #fff;
+                padding: 30px 0;
+            }
+            .main-header h1 {
+                margin: 0;
+                font-size: 2.5em;
+            }
+            section {
+                padding: 20px 0;
+                border-bottom: 1px solid #e4e4e4;
+            }
+            section:last-child {
+                border: none;
+            }
+            .section-title {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+                color: #333;
+            }
+            .section-content p {
+                margin: 0 0 10px 0;
+            }
+            footer {
+                background: #333;
+                color: #fff;
+                text-align: center;
+                padding: 30px 0;
+                margin-top: 20px;
+            }
+            .contact-info {
+                text-align: center;
+            }
+        </style>
+
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "{{ basics.name }}",
+              "jobTitle": "{{ basics.label }}",
+              "email": "{{ basics.email }}",
+              "telephone": "{{ basics.phone }}",
+              "url": "{{ basics.profiles[0].url }}",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "{{ basics.location.address }}",
+                "addressCountry": "NL"
+              },
+              "sameAs": [
+                "{{ basics.profiles[0].url }}",
+                "{{ basics.profiles[1].url }}"
+              ],
+              "worksFor": [
+                {% for job in work %}
+                {
+                  "@type": "Organization",
+                  "name": "{{ job.name }}",
+                  "sameAs": "{{ job.url }}"
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+              ]
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div id="branding">
+                    <h1>{{ basics.name }}</h1>
+                    <p>{{ basics.label }}</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-header">
+            <div class="container">
+                <h1>Curriculum Vitae</h1>
+            </div>
+        </div>
+
+        <section class="contact-info">
+            <div class="container">
+                <h2 class="section-title">Contactgegevens</h2>
+                <p>Email: {{ basics.email }}</p>
+                <p>Telefoon: {{ basics.phone }}</p>
+                <p>Adres: {{ basics.location.address }}</p>
+                <p>
+                    LinkedIn:
+                    <a href="{{ basics.profiles[0].url }}"
+                        >{{ basics.profiles[0].username }}</a
+                    >
+                </p>
+                <p>
+                    Twitter:
+                    <a href="{{ basics.profiles[1].url }}"
+                        >{{ basics.profiles[1].username }}</a
+                    >
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Profiel</h2>
+                <div class="section-content">
+                    <p>{{ basics.summary | safe }}</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Werkervaring</h2>
+                <div class="section-content">
+                    {% for job in work %}
+                    <h3>{{ job.name }} - {{ job.position }}</h3>
+                    <p><strong>Startdatum:</strong> {{ job.startDate }}</p>
+                    <p>
+                        {% if job.endDate %}<strong>Einddatum:</strong> {{
+                        job.endDate }}{% endif %}
+                    </p>
+                    <p>{{ job.summary | safe }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Opleiding</h2>
+                <div class="section-content">
+                    {% for education in education %}
+                    <h3>{{ education.institution }}</h3>
+                    <p><strong>Studierichting:</strong> {{ education.area }}</p>
+                    <p>
+                        <strong>Startdatum:</strong> {{ education.startDate }}
+                    </p>
+                    <p><strong>Einddatum:</strong> {{ education.endDate }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Vaardigheden</h2>
+                <div class="section-content">
+                    {% for skill in skills %}
+                    <p>{{ skill.name }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Certificaten</h2>
+                <div class="section-content">
+                    {% for certificate in certificates %}
+                    <h3>{{ certificate.name }}</h3>
+                    <p><strong>Issuer:</strong> {{ certificate.issuer }}</p>
+                    <p><strong>Date:</strong> {{ certificate.startDate }}</p>
+                    {% if certificate.url %}
+                    <p>
+                        <a href="{{ certificate.url }}">Bekijk certificaat</a>
+                    </p>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Talen</h2>
+                <div class="section-content">
+                    {% for language in languages %}
+                    <p>{{ language.language }} - {{ language.fluency }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Referenties</h2>
+                <div class="section-content">
+                    {% for reference in references %}
+                    <h3>{{ reference.name }}</h3>
+                    <p>{{ reference.reference }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 {{ basics.name }}. Alle rechten voorbehouden.</p>
+        </footer>
+    </body>
+</html>
