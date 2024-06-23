@@ -502,27 +502,34 @@
                 target="_blank"
             >
                 Python</a
-            >. <p> {% for lang_code, url in hreflang_links.items() %} {% if
-            lang_code != "x-default" %} {% set flag_code = lang_code %} {% if
-            lang_code == "hi" %} {% set flag_code = "in" %} {% elif lang_code ==
-            "en" %} {% set flag_code = "eu" %} {% elif lang_code == "zh" %} {%
-            set flag_code = "cn" %} {% endif %}
-            <a href="{{ url }}" title="{{ lang_code }}">
-                <img
-                    src="flags/{{ flag_code }}.svg"
-                    alt="{{ translations.resume }} {{ translations.resume }}: {{ lang_code }}"
-                />
-            </a>
-            {% elif "en" not in hreflang_links %} {% set flag_code =
-            default_language %}
-            <a href="{{ url }}" title="{{ lang_code }}">
-                <img
-                    src="flags/{{ flag_code }}.svg"
-                    alt="{{ translations.resume }} {{ translations.language }}: {{ lang_code }}"
-                    style="width: 24px; height: 24px; margin: 0 5px"
-                />
-            </a>
-            {% endif %} {% endfor %}</p>
+            >. <p>
+            {% for lang_code, url in hreflang_links.items() %}
+                {% if lang_code != "x-default" %}
+                    {% set flag_code = lang_code %}
+                    {% if lang_code == "hi" %}
+                        {% set flag_code = "in" %}
+                    {% elif lang_code == "en" %}
+                        {% set flag_code = "eu" %}
+                    {% elif lang_code == "zh" %}
+                        {% set flag_code = "cn" %}
+                    {% endif %}
+                    <a href="{{ url }}" title="{{ lang_code }}">
+                        <img
+                            src="flags/{{ flag_code }}.svg"
+                            alt="{{ translations.resume }} {{ translations.resume }}: {{ lang_code }}"
+                        />
+                    </a>
+                {% elif "en" not in hreflang_links %}
+                    {% set flag_code = default_language %}
+                        <a href="{{ url }}" title="{{ lang_code }}">
+                            <img
+                                src="flags/{{ flag_code }}.svg"
+                                alt="{{ translations.resume }} {{ translations.language }}: {{ lang_code }}"
+                                style="width: 24px; height: 24px; margin: 0 5px"
+                            />
+                        </a>
+                {% endif %}
+                {% endfor %}</p>
         </footer>
         <script>
             document.addEventListener("DOMContentLoaded", function () {

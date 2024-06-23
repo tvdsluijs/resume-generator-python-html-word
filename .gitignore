@@ -22,6 +22,8 @@ resume_json_files/*
 !resume_json_files/resume_template.json
 !resume_json_files/resume_schema.json
 
+templates/~$*.docx
+
  .DS_Store
 
 # Byte-compiled / optimized / DLL files

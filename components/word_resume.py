@@ -1,7 +1,7 @@
 from datetime import datetime
 from mailmerge import MailMerge
 
-# will add RTL for AR in the future
+# Placeholder for future RTL support
 # pip install python-docx-rtl
 # from docx.shared import Inches
 # from docx.oxml.ns import qn
@@ -20,6 +20,17 @@ from mailmerge import MailMerge
 #     pPr.append(bidi)
 
 def generate_word_resume(data, translations, output_path):
+    """
+    Generate a Word resume from a template and save it to the specified output path.
+
+    Args:
+        data (dict): The resume data to be included in the template.
+        translations (dict): The translations for different text elements in the template.
+        output_path (str): The path where the generated Word file will be saved.
+
+    Returns:
+        None
+    """
     template_path = 'templates/resume_template.docx'  # Path to your Word template
     with MailMerge(template_path) as document:
         merge_data = {
@@ -105,17 +116,16 @@ def generate_word_resume(data, translations, output_path):
                 f'personal_activities_{i}': pi
             })
 
-
         # Add professional_activities details max 10
-        for i, int in enumerate(data['interests'], start=1):
+        for i, interest in enumerate(data['interests'], start=1):
             merge_data.update({
-                f'professional_activities_{i}': int
+                f'professional_activities_{i}': interest
             })
 
         # Add tech_skills
         merge_data[f'skills'] = ', '.join(data['skills'])
 
-        # Add crtificates details max 5
+        # Add certificates details max 5
         for i, cert in enumerate(data['certificates'], start=1):
             merge_data.update({
                 f'certificate_{i}': cert['name']
@@ -142,7 +152,7 @@ def generate_word_resume(data, translations, output_path):
 
         document.merge(**merge_data)
 
-        # Set paragraph direction if language is Arabic
+        # Future feature: Set paragraph direction if language is Arabic
         # if data['basics']['lang'] == 'ar':
         #     for paragraph in document.paragraphs:
         #         set_paragraph_direction(paragraph, direction='RTL')

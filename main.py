@@ -13,6 +13,18 @@ from components.cloudconvert_to_pdf import convert_to_pdf
 from jinja2 import Environment, FileSystemLoader
 
 def main():
+    """
+    Main function to generate resumes in multiple languages from JSON files.
+    The JSON files contain the data for the resumes, and the script uses Jinja2 templates to generate the HTML output.
+    The script also generates structured data in JSON-LD format and Word documents.
+
+    Steps:
+    1. Set up the Jinja2 environment and filters.
+    2. Ensure the output directory exists.
+    3. Process each JSON file to collect languages.
+    4. Generate hreflang links.
+    5. Generate resumes, structured data, and Word documents for each language.
+    """
     # Set the default language
     default_language = "en"  # or whichever language you want to set as default
 
@@ -65,13 +77,13 @@ def main():
             generate_structured_data(data, structured_data_path)
             generate_word_resume(data, translations, word_output_path)
 
-            # Generate PDF with cloudconvert API you need to pay fo the API
-            # First read api from configfile
+            # Generate PDF with cloudconvert API you need to pay for the API
+            # First read api from config file
             # cloudconvert_api = read_config_file("config/cloudconvert.txt")
             # convert_to_pdf(word_output_path, lang, cloudconvert_api)
 
-            # OR use Generate PDF resume (not possible on Mac OS M1/M2/M3/Mx cpu's)
-            #generate_pdf_resume(language:str = ""):
+            # OR use Generate PDF resume (not possible on Mac OS M1/M2/M3/Mx CPUs)
+            # generate_pdf_resume(language:str = ""):
 
 if __name__ == "__main__":
     main()

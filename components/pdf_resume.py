@@ -1,10 +1,11 @@
-# Future release
 # to use the spire.doc library, you need to install the library's
 # pip install Spire.Doc
 # AND
 # pip install plum-dispatch==1.7.4
 #
 # Below code is untested! As I cannot install the library on my machine
+
+# NOT TESTED FEATURE !!!
 
 # UNMOMMENT FROM NEXT LINE TO END OF FILE
 # from spire.doc import *

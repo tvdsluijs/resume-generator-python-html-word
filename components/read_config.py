@@ -1,5 +1,13 @@
 
-# this function will read the whole text from the given config file
 def read_config_file(file_path):
-    with open(file_path, 'r') as file:
-        return file.read()
+    """
+    Read and return the contents of a configuration file.
+
+    Args:
+        file_path (str): The path to the configuration file.
+
+    Returns:
+        str: The contents of the configuration file as a string.
+    """
+    with open(file_path, 'r') as file:  # Open the file in read mode
+        return file.read()  # Read and return the file content as a string

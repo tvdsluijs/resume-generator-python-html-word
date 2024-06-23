@@ -1,7 +1,9 @@
 #Function to convert a Word Docx file into a PDF file with the cloudconvert API
 #You will upload the Word Docx file to the cloudconvert API and download the converted PDF file
 #The converted PDF file will be saved in the output directory
-
+#
+# NOT TESTED FEATURE !!!
+#
 import requests
 
 def convert_to_pdf(word_file_path: str = "", language: str = "", cloudconvert_api: str = ""):
