@@ -1,183 +1,222 @@
-# Resume Generator
+Sure, based on the provided structure and files, here’s a comprehensive README for your project:
 
-This project is a simple resume generator that converts a JSON file containing resume data into an HTML resume using a Jinja2 template.
+# Resume Generator: Python, HTML, and Word (and sometimes PDF)
 
-## Prerequisites
+This project generates resumes in multiple languages from JSON files. The JSON files contain the data for the resumes, and the script uses Jinja2 templates to generate the HTML output. The script also generates structured data in JSON-LD format for each resume and creates Word documents using a predefined template.
 
-- Python 3.x
-- Jinja2 library
+If you have a non Mx OS machine you will also be able to create PDF files.
+
+## Features
+
+- Generates HTML resumes from JSON data.
+- Creates Word documents from the same JSON data.
+- Supports multiple languages with translations.
+- Generates structured data (JSON-LD) for SEO.
+- Creates a sitemap.xml and robots.txt for SEO.
+
+## Project Structure
+
+```
+resume-generator-python-html-word/
+├── components/
+│   ├── json_utils.py
+│   ├── template_utils.py
+│   ├── structured_data.py
+│   ├── word_resume.py
+├── config/
+│   ├── cloudconvert_sample.txt
+├── output/
+│   ├── icons/
+│   ├── images/
+│   ├── fonts/
+│   ├── flags/
+│   ├── style.css
+├── resume_json_files/
+│   ├── resume_en.json
+├── test/
+├── templates/
+│   ├── resume_template.docx
+│   ├── resume_template.html
+├── translations/
+│   ├── en.json
+├── main.py
+├── pixi.toml
+└── README.md
+```
 
 ## Installation
 
-1. **Clone the repository** (if applicable):
-    ```sh
-    git clone https://github.com/yourusername/resume-generator.git
-    cd resume-generator
-    ```
+1. Clone the repository:
+   ```bash
+   git clone git@github.com:tvdsluijs/resume-generator-python-html-word.git
+   cd resume-generator-python-html-word
+   ```
 
-2. **Install Jinja2**:
-    ```sh
-    pip install jinja2
-    ```
+2. Install dependencies using Pixi:
+   ```bash
+   pixi install
+   ```
 
-## LinkedIn Profile Exporter to JSON
-If you want to export your LinkedIn profile to JSON, you can use the following tool:
-- [LinkedIn JSON Resume Exporter for Chrome](https://chromewebstore.google.com/detail/json-resume-exporter/caobgmmcpklomkcckaenhjlokpmfbdec)
+3. Ensure you have `pdflatex` and `rsvg-convert` installed if you plan to convert files.
+
+### PIP users
+
+If you are not using Pixi (you should) and want to use PIP install the required packages:
+
+```bash
+pip install jinja2
+pip install python-docx
+pip install python-docx-mailmerge
+pip install requests
+```
 
 ## Usage
 
-1. **Prepare your JSON data**:
-    - Create a JSON file named `resume.json` with your resume data. The structure should follow the [JSON Resume schema](https://jsonresume.org/schema/).
+1. Place your JSON resume files in the `resume_json_files` directory.
+2. Place your translation files in the `translations` directory.
+3. Place your HTML and Word templates in the `templates` directory.
 
-2. **Create a Jinja2 template**:
-    - Create an HTML template file named `resume_template.html` in the same directory. This template will define how your resume should be formatted. You can use placeholders for the data fields, e.g., `{{ basics.name }}`, `{{ work[0].position }}`, etc.
+### Generating Resumes
 
-3. **Run the script**:
-    - Save the following script as `generate_resume.py` in the same directory:
+Run the main script to generate the HTML, structured data, and Word documents:
 
-    ```python
-    import json
-    from jinja2 import Environment, FileSystemLoader
+```bash
+python main.py
+```
 
-    # Load JSON data
-    with open('resume.json', 'r') as file:
-        data = json.load(file)
+### Key Components
 
-    # Load the Jinja2 template
-    file_loader = FileSystemLoader('.')
-    env = Environment(loader=file_loader)
-    template = env.get_template('resume_template.html')
+- `json_utils.py`: Utility functions for handling JSON data.
+- `template_utils.py`: Functions for managing Jinja2 templates.
+- `structured_data.py`: Functions for generating JSON-LD structured data.
+- `word_resume.py`: Functions for creating Word documents using the MailMerge library.
 
-    # Render the template with data
-    output = template.render(data)
+### Example JSON Data
 
-    # Save the output to an HTML file
-    with open('your_resume.html', 'w') as file:
-        file.write(output)
-
-    print("Your resume is generated successfully!")
-    ```
-
-4. **Generate your resume**:
-    - Run the script:
-    ```sh
-    python generate_resume.py
-    ```
-
-    - This will generate an HTML file named `your_resume.html` in the same directory, containing your formatted resume.
-
-## Example
-
-Here is an example of how the JSON data (`resume.json`) might look:
+An example of a JSON resume file:
 
 ```json
 {
   "basics": {
-    "name": "YOUR NAME",
-    "label": "YOUR PROFESSION",
-    "email": "EMAIL",
-    "phone": "MOBILE NUMBER",
+    "lang": "en",
+    "name": "John Doe",
+    "label": "Software Engineer",
+    "email": "john.doe@example.com",
+    "phone": "+1234567890",
     "location": {
-      "address": "YOUR ADDRESS"
+      "countryCode": "US",
+      "address": "123 Main Street, Anytown, USA"
     },
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "USERNAME",
-        "url": "URL/"
-      },
-      {
-        "network": "OTHER NETWORK NAME (e.g., Twitter)",
-        "username": "USERNAME",
-        "url": "https://twitter.com/USERNAME"
+        "url": "https://linkedin.com/in/johndoe",
+        "icon": "linkedin.svg"
       }
     ]
   },
   "work": [
     {
-      "name": "COMPANY NAME",
-      "position": "YOUR POSITION",
-      "startDate": "START DATE",
-      "endDate": "",
-      "summary": "JOB DESCRIPTION"
+      "name": "Tech Company",
+      "position": "Senior Developer",
+      "startDate": "2020-01-01",
+      "endDate": "Present",
+      "summary": "Developing awesome applications.",
+      "url": "https://techcompany.com",
+      "location": "Remote"
     }
-    // Additional work experiences...
   ],
-  // Additional sections (education, skills, etc.)...
+  "education": [
+    {
+      "institution": "University",
+      "area": "Computer Science",
+      "startDate": "2010-09-01",
+      "endDate": "2014-06-01"
+    }
+  ],
+  "skills": [
+    "Python",
+    "Django",
+    "JavaScript"
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Native speaker"
+    }
+  ]
 }
 ```
 
-And here is an example of how the Jinja2 template (`resume_template.html`) might look:
+### Example Translation File
 
-```html
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - {{ basics.name }}</title>
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
-        .container { width: 80%; margin: auto; overflow: hidden; }
-        header { background: #333; color: #fff; padding-top: 30px; min-height: 70px; border-bottom: #77A6F7 3px solid; }
-        .main-header { text-align: center; background: #5D6D7E; color: #fff; padding: 30px 0; }
-        section { padding: 20px 0; border-bottom: 1px solid #e4e4e4; }
-        .section-title { font-size: 1.8em; margin-bottom: 10px; color: #333; }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <h1>{{ basics.name }}</h1>
-            <p>{{ basics.label }}</p>
-        </div>
-    </header>
+An example of a translation file (`en.json`):
 
-    <div class="main-header">
-        <div class="container">
-            <h1>Curriculum Vitae</h1>
-        </div>
-    </div>
-
-    <section>
-        <div class="container">
-            <h2 class="section-title">Contactgegevens</h2>
-            <p>Email: {{ basics.email }}</p>
-            <p>Telefoon: {{ basics.phone }}</p>
-            <p>Adres: {{ basics.location.address }}</p>
-            <p>LinkedIn: <a href="{{ basics.profiles[0].url }}">{{ basics.profiles[0].username }}</a></p>
-            <p>Twitter: <a href="{{ basics.profiles[1].url }}">{{ basics.profiles[1].username }}</a></p>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <h2 class="section-title">Profiel</h2>
-            <p>{{ basics.summary | safe }}</p>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <h2 class="section-title">Werkervaring</h2>
-            {% for job in work %}
-                <h3>{{ job.name }} - {{ job.position }}</h3>
-                <p><strong>Startdatum:</strong> {{ job.startDate }}</p>
-                <p>{% if job.endDate %}<strong>Einddatum:</strong> {{ job.endDate }}{% endif %}</p>
-                <p>{{ job.summary | safe }}</p>
-            {% endfor %}
-        </div>
-    </section>
-
-    <!-- Additional sections for education, skills, etc. -->
-
-    <footer>
-        <p>&copy; 2024 Theo van der Sluijs. Alle rechten voorbehouden.</p>
-    </footer>
-</body>
-</html>
+```json
+{
+  "resume": "Resume",
+  "profile_summary": "Profile Summary",
+  "contact": "Contact",
+  "languages": "Languages",
+  "work_experience": "Work Experience",
+  "education": "Education",
+  "skills": "Skills",
+  "present": "Present"
+}
 ```
+
+### Templates
+
+- **HTML Template**: Located at `templates/resume_template.html`
+- **Word Template**: Located at `templates/resume_template.docx`
+
+If you want to change the FIELDS in Word fn+Option+F9 fn+F9 to toggle between fields and code.
+
+## SEO Considerations
+
+The project generates SEO-friendly structured data (JSON-LD) and includes a sitemap.xml and robots.txt:
+
+- `sitemap.xml`: Lists all resume pages for search engines.
+- `robots.txt`: Points to the sitemap.xml and sets crawling rules.
+
+## Customization
+
+### CSS
+
+- The main stylesheet is located at `output/style.css`.
+- Customize the CSS to change the look and feel of the HTML resumes.
+
+### Icons and Images
+
+- Icons are located in the `output/icons/` directory.
+- Images are located in the `output/images/` directory.
+- Flags are located in the `output/flags/` directory.
+
+## Demo
+
+You can find a demo of this site (and downloadble Word & PDF file of the resume) at [https://theovandersluijs.eu](https://theovandersluijs.eu).
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Author
+
+- **Theo van der Sluijs**
+  - [Website](https://itheo.tech)
+  - [Email](mailto:info@itheo.tech)
+
+## Contributions
+
+Contributions are welcome! Please submit pull requests or open issues to improve the project.
+
+## Version
+0.1 - 2024-05-30
+0.2 - 2024-06-01
+0.3 - 2024-06-05
+0.4 - 2024-06-10
+0.5 - 2024-06-12
+0.6 - 2024-06-15
+1.0 - 2024-06-16
+- Initial release with support for generating resumes in HTML and Word formats.
+- SEO optimizations with hreflang links, sitemap, and robots.txt.

@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="{{ basics.lang }}" {% if basics.lang == 'ar' %}dir="rtl"{% endif %}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{ translations.resume }} - {{ basics.name }}</title>
+        <meta name="description" content="{{ basics.meta_description }}" />
+        <meta
+            name="keywords"
+            content="Resume, {{ basics.name }}, {{ basics.label }}"
+        />
+        <meta name="robots" content="index, follow" />
+
+        <!-- Open Graph Meta Tags -->
+        <meta
+            property="og:title"
+            content="{{ translations.resume }} - {{ basics.name }}"
+        />
+        <meta
+            property="og:description"
+            content="{{ basics.meta_description }}"
+        />
+        <meta property="og:image" content="{{ basics.image }}" />
+        <meta
+            property="og:url"
+            content="{{ base_url }}/{{ lang_code }}_resume.html"
+        />
+        <meta property="og:type" content="website" />
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="{{ translations.resume }} - {{ basics.name }}"
+        />
+        <meta
+            name="twitter:description"
+            content="{{ basics.meta_description }}"
+        />
+        <meta name="twitter:image" content="{{ basics.image }}" />
+
+        <!-- <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        /> -->
+        <link rel="stylesheet" href="style.css" />
+
+        <!-- Hreflang Links -->
+        <link rel="alternate" hreflang="x-default" href="index.html" />
+        {% for lang_code, url in hreflang_links.items() %}
+        <link rel="alternate" hreflang="{{ lang_code }}" href="{{ url }}" />
+        {% endfor %}
+
+        <!-- Favicon and Icons -->
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"
+        />
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+        <link rel="manifest" href="site.webmanifest" />
+        <link
+            rel="mask-icon"
+            href="/images/safari-pinned-tab.svg"
+            color="#5bbad5"
+        />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+    </head>
+    <body>
+        <!-- Your existing body content -->
+
+        <div class="container">
+            <div class="profile-wrapper">
+                <div class="profile">
+                    <div
+                        class="profile-photo"
+                        alt="Profile photo of {{ basics.name }}"
+                        style="background-image: url('{{ basics.picture }}');"
+                    ></div>
+                    <div class="profile-info">
+                        <h2 class="heading heading-light">
+                            {{ translations.profile_summary }}
+                        </h2>
+                        <div class="profile-text">{{ basics.intro }}</div>
+                        <div class="contacts personal_interests">
+                            <h2 class="heading heading-light">
+                                {{ translations.personal_activities }}
+                            </h2>
+                            <div class="languages">
+                                <ul class="language-list">
+                                    {% for personal_activity in
+                                    personal_activities %}
+                                    <li class="language-item">
+                                        <span class="language-text"
+                                            >{{ personal_activity }}</span
+                                        >
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="contacts personal_activities">
+                            <h2 class="heading heading-light">
+                                {{ translations.personal_interests }}
+                            </h2>
+                            <div class="languages">
+                                <ul class="language-list">
+                                    {% for personal_interest in
+                                    personal_interests %}
+                                    <li class="language-item">
+                                        <span class="language-text"
+                                            >{{ personal_interest }}</span
+                                        >
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="contacts">
+                            <h2 class="heading heading-light">
+                                {{ translations.languages }}
+                            </h2>
+                            <div class="languages">
+                                <ul class="language-list">
+                                    {% for language in languages %}
+                                    <li class="language-item">
+                                        <span class="language-text"
+                                            >{{ language.language }} ({{
+                                            language.fluency }} - level)</span
+                                        >
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="contacts">
+                            <h2 class="heading heading-light">
+                                {{ translations.contact }}
+                            </h2>
+                            <div class="contacts-item">
+                                <h3 class="contacts-title">
+                                    <!-- <i class="fas fa-phone-volume"></i> -->
+                                    <img
+                                        src="icons/phone.svg"
+                                        alt="phone number"
+                                        class="xxsmall" />
+                                    <a
+                                        href="tel:{{ basics.phone }}"
+                                        class="contacts-text"
+                                        >{{ basics.phone }}</a
+                                    >
+                                </h3>
+                            </div>
+                            <div class="contacts-item">
+                                <h3 class="contacts-title">
+                                    <!-- <i class="fas fa-envelope"></i> -->
+                                    <img
+                                        src="icons/email.svg"
+                                        alt="email"
+                                        class="xxsmall" />
+                                    <a
+                                        href="mailto:{{ basics.email }}"
+                                        class="contacts-text"
+                                        >{{ basics.email }}</a
+                                    >
+                                </h3>
+                            </div>
+                            <div class="contacts-item">
+                                <div class="contacts-title">
+                                    <!-- <i class="fas fa-globe-americas"></i> -->
+                                    <img
+                                        src="icons/internet.svg"
+                                        alt="internet link"
+                                        class="xxsmall" />
+                                    <a
+                                        href="{{ basics.url }}"
+                                        class="contacts-text"
+                                        >{{ basics.url }}</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contacts">
+                            <h2 class="heading heading-light">
+                                {{ translations.find_me_on }}
+                            </h2>
+                            <div class="social-links">
+                                {% for profile in basics.profiles %}
+                                <a
+                                    href="{{ profile.url }}"
+                                    class="social-link"
+                                    target="_blank"
+                                    title="{{ profile.network }}"
+                                    alt="{{ profile.network }}">
+                                        <img src="icons/{{ profile.icon }}" class"xsmall" alt="{{ profile.network }}" />
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="contacts">
+                            <h2 class="heading heading-light">
+                                {{ translations.download_resume }}
+                            </h2>
+                            <div class="social-links">
+                                {% for download in downloads %}
+                                <a
+                                    href="{{ download.url }}"
+                                    class="social-link"
+                                    target="_blank"
+                                    title="{{ download.name }}"
+                                    alt="{{ download.name }}"
+                                    >
+                                    <img src="icons/{{ download.icon }}" class"" alt="{{ download.name }}" />
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="resume">
+                <div class="resume-wrap">
+                    <div class="logo">
+                        <div class="logo-lines logo-lines_left">
+                            <span class="logo-line"></span>
+                            <span class="logo-line"></span>
+                            <span class="logo-line"></span>
+                        </div>
+                        <div class="logo-img">{{ basics.shortname }}</div>
+                        <div class="logo-lines logo-lines_right">
+                            <span class="logo-line"></span>
+                            <span class="logo-line"></span>
+                            <span class="logo-line"></span>
+                        </div>
+                    </div>
+                    <div class="about">
+                        <h1 class="name">{{ basics.name }}</h1>
+                        <span class="position">{{ basics.label }}</span>
+                        <address class="about-address">
+                            {{ basics.location.address }} / {{
+                            basics.location.countryCode }}
+                        </address>
+                        <div class="about-contacts">
+                            <a
+                                href="tel:{{ basics.phone }}"
+                                class="about-contact"
+                                ><b>t</b>: {{ basics.phone }}</a
+                            >
+                            |
+                            <a
+                                href="mailto:{{ basics.email }}"
+                                class="about-contact"
+                                ><b>m</b>: {{ basics.email }}</a
+                            >
+                            |
+                            <a
+                                href="https://{{ basics.url }}"
+                                class="about-contact"
+                                ><b>w</b>: {{ basics.url }}</a
+                            >
+                        </div>
+                    </div>
+                    <div class="intro">
+                        <h2 class="heading heading_dark">
+                            {{ translations.profile }}
+                        </h2>
+                        <div>{{ basics.summary | nl2p | safe }}</div>
+                    </div>
+                    <div class="experience">
+                        <h2 class="heading heading_dark">
+                            {{ translations.work_experience }}
+                        </h2>
+                        {% for job in work %}
+                        <div class="list-item">
+                            <img
+                                src="icons/network-wired.svg"
+                                alt="Job"
+                                class="small"
+                            />
+                            <div class="list-item__content">
+                                <h4 class="list-item__title">
+                                    {{ job.name }}, {{ job.location }} {% if
+                                    job.url %}
+                                    <a
+                                        href="{{ job.url }}"
+                                        target="_blank"
+                                        class="job-link"
+                                    >
+                                        <!-- <i class="fa-solid fa-link"></i> -->
+                                        <img
+                                            src="icons/link.svg"
+                                            alt="Link to jobsite"
+                                            class="xxsmall"
+                                        />
+                                    </a>
+                                    {% endif %}
+                                </h4>
+                                <span class="list-item__date"
+                                    >{{ job.startDate }} – {{ job.endDate or
+                                    translations.present }}</span
+                                >
+                                <p class="list-item__text">{{ job.summary }}</p>
+                                <span class="list-item__text bold"
+                                    >{{ translations.skills }}:</span
+                                >
+                                <span class="list-item__text"
+                                    >{{ job.skills | join(', ') }}</span
+                                >
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="education">
+                        <h2 class="heading heading_dark">
+                            {{ translations.education }}
+                        </h2>
+                        {% for edu in education %}
+                        <div class="list-item">
+                            <!-- <i
+                                class="fas fa-graduation-cap list-item__icon"
+                            ></i> -->
+                            <img
+                                src="icons/education.svg"
+                                alt="Education"
+                                class="small" />
+                            <div class="list-item__content">
+                                <h4 class="list-item__title">
+                                    {{ edu.institution }}
+                                </h4>
+                                <span class="list-item__date"
+                                    >{{ edu.startDate }} – {{ edu.endDate or
+                                    translations.present }}</span
+                                >
+                                <p class="list-item__text">{{ edu.area }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="skills">
+                        <h2 class="heading heading_dark heading_skills">
+                            {{ translations.tech_skills }}
+                        </h2>
+                        <ul class="skills-list">
+                            <li class="skills-list__item">
+                                {{ skills | join(', ') }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="skills">
+                        <h2 class="heading heading_dark heading_skills">
+                            {{ translations.professional_interests_activities }}
+                        </h2>
+                        <ul class="skills-list">
+                            {% for interest in interests %}
+                            <li class="skills-list__item">{{ interest }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="certificates">
+                        <h2 class="heading heading_dark heading_certificates">
+                            {{ translations.certificates }}
+                        </h2>
+                        <div class="certificates-list">
+                            {% for cert in certificates %} {% if cert.url %}
+                            <a
+                                href="{{ cert.url }}"
+                                target="_blank"
+                                class="contacts-text"
+                            >
+                                <img
+                                    class="certificates-list__item"
+                                    src="{{ cert.image }}"
+                                    alt="{{ cert.name }}"
+                                />
+                            </a>
+                            {% else %}
+                            <img
+                                class="certificates-list__item"
+                                src="{{ cert.image }}"
+                                alt="{{ cert.name }}"
+                            />
+                            {% endif %} {% endfor %}
+                        </div>
+                    </div>
+                    <div class="experience">
+                        <h2 class="heading heading_dark heading_skills">
+                            {{ translations.hobby_projects }}
+                        </h2>
+                        {% for project in projects %}
+                        <div class="list-item">
+                            <!-- <i
+                                class="fa-solid fa-diagram-project list-item__icon"
+                            ></i> -->
+                            <img
+                                src="icons/hobby.svg"
+                                alt="hobby projects"
+                                class="small" />
+                            <div class="list-item__content">
+                                <h4 class="list-item__title">
+                                    {{ project.name }} {% if project.url %}
+                                    <a href="{{ project.url }}" target="_blank">
+                                        <!-- <i class="fa-solid fa-link"></i> -->
+                                        <img
+                                            src="icons/link.svg"
+                                            alt="building"
+                                            class="xxsmall">
+                                    </a>
+                                    {% endif %}
+                                </h4>
+                                <p class="list-item__text">
+                                    {{ project.summary}}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="experience">
+                        <h2 class="heading heading_dark heading_skills">
+                            {{ translations.non_work_related_roles }}
+                        </h2>
+                        {% for vol in volunteer %}
+                        <div class="list-item">
+                            <!-- <i
+                                class="fa-solid fa-diagram-project list-item__icon"
+                            ></i> -->
+                            <img
+                                src="icons/volunteer.svg"
+                                alt="volunteer projects"
+                                class="small" />
+                            <div class="list-item__content">
+                                <h4 class="list-item__title">
+                                    {{ vol.organization }} - {{ vol.position }}
+                                    {% if vol.url %}
+                                    <a href="{{ vol.url }}" target="_blank">
+                                        <img
+                                            src="icons/url.svg"
+                                            alt="volunteer"
+                                            class="xxsmall">
+                                    </a>
+                                    {% endif %}
+                                </h4>
+                                <span class="list-item__date"
+                                    >{{ vol.startDate }} – {{ vol.endDate or
+                                    translations.present }}</span
+                                >
+                                <p class="list-item__text">
+                                    {{ vol.summary}}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="references">
+                        <h2 class="heading heading_dark">
+                            {{ translations.references }}
+                        </h2>
+                        <div class="references-slider">
+                            {% for reference in references %}
+                            <div class="reference-slide">
+                                <p class="reference-text">
+                                    "{{ reference.reference}}"
+                                </p>
+                                <p class="reference-name">
+                                    -
+                                    <a
+                                        href="{{ reference.url }}"
+                                        target="_blank"
+                                        class="contacts-text"
+                                        >{{ reference.name }}</a
+                                    >
+                                </p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            &copy; {{ basics.name }}, {{ year }}. Hosted on GitHub. Build
+            with
+            <a
+                href="https://github.com/tvdsluijs/resume-generator-python-html-word"
+                target="_blank"
+            >
+                Python</a
+            >. <p> {% for lang_code, url in hreflang_links.items() %} {% if
+            lang_code != "x-default" %} {% set flag_code = lang_code %} {% if
+            lang_code == "hi" %} {% set flag_code = "in" %} {% elif lang_code ==
+            "en" %} {% set flag_code = "eu" %} {% elif lang_code == "zh" %} {%
+            set flag_code = "cn" %} {% endif %}
+            <a href="{{ url }}" title="{{ lang_code }}">
+                <img
+                    src="flags/{{ flag_code }}.svg"
+                    alt="{{ translations.resume }} {{ translations.resume }}: {{ lang_code }}"
+                />
+            </a>
+            {% elif "en" not in hreflang_links %} {% set flag_code =
+            default_language %}
+            <a href="{{ url }}" title="{{ lang_code }}">
+                <img
+                    src="flags/{{ flag_code }}.svg"
+                    alt="{{ translations.resume }} {{ translations.language }}: {{ lang_code }}"
+                    style="width: 24px; height: 24px; margin: 0 5px"
+                />
+            </a>
+            {% endif %} {% endfor %}</p>
+        </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("structured-data.json")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const script = document.createElement("script");
+                        script.type = "application/ld+json";
+                        script.textContent = JSON.stringify(data);
+                        document.head.appendChild(script);
+                    })
+                    .catch((error) =>
+                        console.error("Error loading JSON-LD data:", error),
+                    );
+            });
+            document.addEventListener("DOMContentLoaded", function () {
+                let currentSlide = 0;
+                const slides = document.querySelectorAll(".reference-slide");
+                const totalSlides = slides.length;
+                const progressBar = document.createElement("div");
+                progressBar.classList.add("progress-bar");
+                document
+                    .querySelector(".references-slider")
+                    .appendChild(progressBar);
+
+                function showSlide(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle("active", i === index);
+                    });
+                    // Reset progress bar animation
+                    progressBar.style.animation = "none";
+                    progressBar.offsetHeight; // Trigger reflow to restart the animation
+                    progressBar.style.animation = null;
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    showSlide(currentSlide);
+                }
+
+                showSlide(currentSlide);
+                setInterval(nextSlide, 10000); // Change slide every 10 seconds
+            });
+        </script>
+    </body>
+</html>

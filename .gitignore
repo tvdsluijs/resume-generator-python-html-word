@@ -1,4 +1,28 @@
-resume.json
+config/*
+!config/cloudconvert_sample.txt
+
+output/*
+output/images/Krauthammer-Theo_van_der_Sluijs.png
+output/images/PSM-Theo_van_der_Sluijs.png
+output/images/PSPO-Theo_van_der_Sluijs.png
+output/images/Theo_van_der_sluijs.jpeg
+!output/us_resume.html
+!output/us_structured-data.json
+!output/flags
+!output/flags/*
+!output/icons
+!output/icons/*
+!output/fonts
+!output/fonts/*
+!output/images
+!output/images/*
+!output/style.css
+
+resume_json_files/*
+!resume_json_files/resume_template.json
+!resume_json_files/resume_schema.json
+
+ .DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
