@@ -21,6 +21,8 @@
   "email": "E-Mail",
   "website": "Webseite",
   "download_resume": "Lebenslauf herunterladen",
+  "download_full_1page": "Laden Sie die Vollversion oder die einseitige Version herunter",
   "more_work_related": "Weitere Berufserfahrungen finden Sie auf meiner LinkedIn-Seite ",
-  "non_work_related_roles": "Nicht berufsbezogene Rollen"
+  "non_work_related_roles": "Nicht berufsbezogene Rollen",
+  "tldr_version": "Dies ist das „TL;DR“ meines Lebenslaufs. Für meinen vollständigen Lebenslauf möchte ich Sie auf LinkedIn oder meine Lebenslauf-Website verweisen."
 }

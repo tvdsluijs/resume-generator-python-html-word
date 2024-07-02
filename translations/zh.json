@@ -21,6 +21,8 @@
   "email": "电子邮件",
   "website": "网站",
   "download_resume": "下载简历",
+  "download_full_1page": "下载完整版或一页版本",
   "more_work_related": "更多工作经验可在我的 LinkedIn 页面上找到 ",
-  "non_work_related_roles": "非工作相关角色"
+  "non_work_related_roles": "非工作相关角色",
+  "tldr_version": "这是我的简历的“TL;DR”，对于我的完整简历，我建议您访问 LinkedIn 或我的简历网站。"
 }

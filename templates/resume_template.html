@@ -38,14 +38,7 @@
             content="{{ basics.meta_description }}"
         />
         <meta name="twitter:image" content="{{ basics.image }}" />
-
-        <!-- <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        /> -->
+        {{analytics.head}}
         <link rel="stylesheet" href="style.css" />
 
         <!-- Hreflang Links -->
@@ -93,6 +86,35 @@
                         alt="Profile photo of {{ basics.name }}"
                         style="background-image: url('{{ basics.picture }}');"
                     ></div>
+
+                    <div class="about mobile">
+                        <h1 class="name">{{ basics.name }}</h1>
+                        <span class="position">{{ basics.label }}</span>
+                        <address class="about-address">
+                            {{ basics.location.address }} / {{
+                            basics.location.countryCode }}
+                        </address>
+                        <div class="about-contacts">
+                            <a
+                                href="tel:{{ basics.phone }}"
+                                class="about-contact"
+                                ><b>t</b>: {{ basics.phone }}</a
+                            >
+                            |
+                            <a
+                                href="mailto:{{ basics.email }}"
+                                class="about-contact"
+                                ><b>m</b>: {{ basics.email }}</a
+                            >
+                            |
+                            <a
+                                href="https://{{ basics.url }}"
+                                class="about-contact"
+                                ><b>w</b>: {{ basics.url }}</a
+                            >
+                        </div>
+                    </div>
+
                     <div class="profile-info">
                         <h2 class="heading heading-light">
                             {{ translations.profile_summary }}
@@ -163,6 +185,7 @@
                                     <a
                                         href="tel:{{ basics.phone }}"
                                         class="contacts-text"
+                                        data-umami-event="click phone nr"
                                         >{{ basics.phone }}</a
                                     >
                                 </h3>
@@ -177,6 +200,7 @@
                                     <a
                                         href="mailto:{{ basics.email }}"
                                         class="contacts-text"
+                                        data-umami-event="Email click {{ basics.email }}"
                                         >{{ basics.email }}</a
                                     >
                                 </h3>
@@ -191,6 +215,7 @@
                                     <a
                                         href="{{ basics.url }}"
                                         class="contacts-text"
+                                        data-umami-event="Url click {{ basics.url }}"
                                         >{{ basics.url }}</a
                                     >
                                 </div>
@@ -207,6 +232,7 @@
                                     class="social-link"
                                     target="_blank"
                                     title="{{ profile.network }}"
+                                    data-umami-event="Social click {{ profile.network }}"
                                     alt="{{ profile.network }}">
                                         <img src="icons/{{ profile.icon }}" class"xsmall" alt="{{ profile.network }}" />
                                     </a>
@@ -224,19 +250,21 @@
                                     class="social-link"
                                     target="_blank"
                                     title="{{ download.name }}"
+                                    data-umami-event="Download click {{ download.name }}"
                                     alt="{{ download.name }}"
                                     >
                                     <img src="icons/{{ download.icon }}" class"" alt="{{ download.name }}" />
                                     </a>
                                 {% endfor %}
                             </div>
+                            <div class="small-text">{{translations.download_full_1page}}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="resume">
-                <div class="resume-wrap">
-                    <div class="logo">
+                <div class="resume-wrap non-mobile">
+                    <div class="logo non-mobile">
                         <div class="logo-lines logo-lines_left">
                             <span class="logo-line"></span>
                             <span class="logo-line"></span>
@@ -249,7 +277,7 @@
                             <span class="logo-line"></span>
                         </div>
                     </div>
-                    <div class="about">
+                    <div class="about non-mobile">
                         <h1 class="name">{{ basics.name }}</h1>
                         <span class="position">{{ basics.label }}</span>
                         <address class="about-address">
@@ -450,7 +478,7 @@
                                     {% if vol.url %}
                                     <a href="{{ vol.url }}" target="_blank">
                                         <img
-                                            src="icons/url.svg"
+                                            src="icons/link.svg"
                                             alt="volunteer"
                                             class="xxsmall">
                                     </a>
@@ -500,6 +528,7 @@
             <a
                 href="https://github.com/tvdsluijs/resume-generator-python-html-word"
                 target="_blank"
+                 data-umami-event="github"
             >
                 Python</a
             >. <p>
@@ -513,7 +542,7 @@
                     {% elif lang_code == "zh" %}
                         {% set flag_code = "cn" %}
                     {% endif %}
-                    <a href="{{ url }}" title="{{ lang_code }}">
+                    <a href="{{ url }}" title="{{ lang_code }}" data-umami-event="Flag click {{ lang_code }}">
                         <img
                             src="flags/{{ flag_code }}.svg"
                             alt="{{ translations.resume }} {{ translations.resume }}: {{ lang_code }}"
@@ -521,7 +550,7 @@
                     </a>
                 {% elif "en" not in hreflang_links %}
                     {% set flag_code = default_language %}
-                        <a href="{{ url }}" title="{{ lang_code }}">
+                        <a href="{{ url }}" title="{{ lang_code }}" data-umami-event="Flag click {{ lang_code }}">
                             <img
                                 src="flags/{{ flag_code }}.svg"
                                 alt="{{ translations.resume }} {{ translations.language }}: {{ lang_code }}"
@@ -531,9 +560,10 @@
                 {% endif %}
                 {% endfor %}</p>
         </footer>
+        {{analytics.bodyend}}
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                fetch("structured-data.json")
+                fetch("{{ basics.lang }}_structured-data.json")
                     .then((response) => response.json())
                     .then((data) => {
                         const script = document.createElement("script");

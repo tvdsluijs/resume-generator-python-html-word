@@ -21,6 +21,8 @@
   "email": "Correo Electrónico",
   "website": "Sitio Web",
   "download_resume": "Descargar currículum",
+  "download_full_1page": "Descargar la versión completa o de 1 página",
   "more_work_related": "Más experiencia laboral se puede encontrar en mi página de LinkedIn",
-  "non_work_related_roles": "Roles no relacionados con el trabajo"
+  "non_work_related_roles": "Roles no relacionados con el trabajo",
+  "tldr_version": "Este es el 'TL;DR' de mi Currículum. Para ver mi Currículum completo, me gustaría remitirte a LinkedIn o a mi sitio de Currículum."
 }

@@ -1,4 +1,4 @@
-def generate_downloads(language: str = "", word: bool = False, pdf: bool = False):
+def generate_downloads(language: str = "", word: bool = False, pdf: bool = False, tldr: bool = False):
     """
     Generate a list of downloadable resume links based on the given parameters.
 
@@ -23,18 +23,30 @@ def generate_downloads(language: str = "", word: bool = False, pdf: bool = False
     if word:
         download = {
             'url': f"{language}_resume.docx",
-            'name': f"{language} Resume",
+            'name': f"{language} MS-Word resume",
             'icon': 'word.svg'
         }
         downloads.append(download)
-
+        if tldr:
+            download = {
+                'url': f"{language}_resume_tldr.docx",
+                'name': f"{language} MS-Word 1 page resume",
+                'icon': 'word-1p.svg'
+            }
+            downloads.append(download)
     # If the PDF option is selected, add the PDF resume link to the list
     if pdf:
         download = {
             'url': f"{language}_resume.pdf",
-            'name': f"{language} Resume",
+            'name': f"{language} PDF resume",
             'icon': 'pdf.svg'
         }
         downloads.append(download)
-
+        if tldr:
+            download = {
+                'url': f"{language}_resume_tldr.pdf",
+                'name': f"{language} PDF 1 page resume",
+                'icon': 'pdf-1p.svg'
+            }
+            downloads.append(download)
     return downloads  # Return the list of download links

@@ -21,6 +21,8 @@
   "email": "E-mail",
   "website": "Website",
   "download_resume": "Download CV",
+  "download_full_1page": "Download volledige of 1 pagina versie",
   "more_work_related": "Meer werkervaring vind je op mijn LinkedIn-pagina",
-  "non_work_related_roles": "Niet-werkgerelateerde rollen"
+  "non_work_related_roles": "Niet-werkgerelateerde rollen",
+  "tldr_version": "Dit is de „TL;DR“ van mijn CV, voor mijn volledige CV verwijs ik u graag door naar linkedin of mijn cv-site."
 }

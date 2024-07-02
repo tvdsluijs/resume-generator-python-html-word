@@ -56,26 +56,38 @@ def main():
     # Generate hreflang links
     hreflang_links = generate_hreflang_links(data['basics'], languages, default_language)
 
+    analytics_bodyend = read_config_file("config/analytics_bodyend.txt")
+    analytics_head = read_config_file("config/analytics_head.txt")
+
     # Generate resumes and structured data
     for filename in os.listdir(json_dir):
         if filename.endswith('.json') and filename not in not_files:
             data = load_json(os.path.join(json_dir, filename))
+
+            data['analytics'] = {
+                'head': analytics_head,
+                'bodyend': analytics_bodyend
+            }
+
             lang = data['basics']['lang']
-            downloads = generate_downloads(language=lang, word=True, pdf=True)
+            downloads = generate_downloads(language=lang, word=True, pdf=True, tldr=True)
             translations = load_json(os.path.join(translations_dir, f"{lang}.json"))
             output_filename = f"{lang}_resume.html"
             if lang == default_language:
                 output_filename = "index.html"
             structured_data_filename = f"{lang}_structured-data.json"
             word_output_filename = f"{lang}_resume.docx"
+            word_output_tldr_filename = f"{lang}_resume_tldr.docx"
             output_path = os.path.join(output_dir, output_filename)
             structured_data_path = os.path.join(output_dir, structured_data_filename)
             word_output_path = os.path.join(output_dir, word_output_filename)
+            word_output_tldr_path = os.path.join(output_dir, word_output_tldr_filename)
 
             # Generate resume, structured data, and Word document
             generate_resume(template, data, translations, hreflang_links, output_path, downloads)
             generate_structured_data(data, structured_data_path)
-            generate_word_resume(data, translations, word_output_path)
+            generate_word_resume(data, translations, word_output_path, False)
+            generate_word_resume(data, translations, word_output_tldr_path, True)
 
             # Generate PDF with cloudconvert API you need to pay for the API
             # First read api from config file
@@ -87,3 +99,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# RUN SCRIPT > pixi run python main.py

@@ -58,15 +58,6 @@ a:focus {
 }
 
 /* Container and Profile Section */
-/* .container {
-    display: flex;
-    max-width: 1366px;
-    justify-content: space-between;
-    margin: 20px auto;
-    box-shadow: var(--box-shadow);
-} */
-
-/* Container and Profile Section */
 .container {
     display: flex;
     max-width: 1366px;
@@ -87,14 +78,6 @@ a:focus {
     border-top-left-radius: 70px; /* Matches the radius of .profile */
     z-index: 1;
 }
-
-/* .profile {
-    flex-basis: 26%;
-    background-color: var(--side-bar-color);
-    color: var(--dark-text-color);
-    border-top-left-radius: 15px;
-}
-*/
 
 .profile-wrapper {
     flex-basis: 26%;
@@ -311,6 +294,15 @@ address {
     padding-bottom: 30px;
     text-align: center;
     margin-bottom: 40px;
+}
+
+.about.mobile {
+    display: none;
+    padding-bottom: 10px !important;
+    margin-bottom: 5px !important;
+}
+.about.non-mobile {
+    display: block;
 }
 
 .name {
@@ -545,6 +537,17 @@ address {
     .lines {
         display: none;
     }
+
+    .about.mobile {
+        display: block;
+    }
+    .about.non-mobile,
+    .logo.non-mobile {
+        display: none;
+    }
+    .intro {
+        margin: 25px 0;
+    }
 }
 
 @media (max-width: 768px) {
@@ -751,4 +754,9 @@ footer p {
     100% {
         width: 0;
     }
+}
+
+.small-text {
+    margin-top: 5px !important;
+    font-size: 0.8em;
 }

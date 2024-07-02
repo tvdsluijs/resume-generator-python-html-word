@@ -19,7 +19,7 @@ from mailmerge import MailMerge
 #     bidi.set(qn('w:val'), '1' if direction == 'RTL' else '0')
 #     pPr.append(bidi)
 
-def generate_word_resume(data, translations, output_path):
+def generate_word_resume(data, translations, output_path, tldr:bool = False):
     """
     Generate a Word resume from a template and save it to the specified output path.
 
@@ -31,7 +31,11 @@ def generate_word_resume(data, translations, output_path):
     Returns:
         None
     """
-    template_path = 'templates/resume_template.docx'  # Path to your Word template
+    if tldr:
+        template_path = 'templates/resume_tldr_template.docx'  # Path to your Word template
+    else:
+        template_path = 'templates/resume_template.docx'  # Path to your Word template
+
     with MailMerge(template_path) as document:
         merge_data = {
             'name': data['basics']['name'],
@@ -63,6 +67,7 @@ def generate_word_resume(data, translations, output_path):
             'trl_professional_interests_activities': translations['professional_interests_activities'],
             'trl_tech_skills': translations['tech_skills'],
             'trl_certificates': translations['certificates'],
+            'trl_tldr_version': translations['tldr_version'],
             'trl_hobby_projects': translations['hobby_projects'],
             'trl_more_work_related': translations['more_work_related'],
             'trl_non_work_related_roles': translations['non_work_related_roles'],
@@ -81,6 +86,7 @@ def generate_word_resume(data, translations, output_path):
                 merge_data.update({
                     f'work_name_{work_counter}': job['name'],
                     f'work_position_{work_counter}': job['position'],
+                    f'work_location_{work_counter}': job['location'],
                     f'work_start_{work_counter}': job['startDate'],
                     f'work_end_{work_counter}': job['endDate'] or translations['present'],
                     f'work_summary_{work_counter}': job['summary'],

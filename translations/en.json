@@ -21,6 +21,8 @@
   "email": "Email",
   "website": "Website",
   "download_resume": "Download resume",
+  "download_full_1page": "Download full or 1 page version",
   "more_work_related": "More work experience can be found on my LinkedIn page ",
-  "non_work_related_roles": "Non-work related roles"
+  "non_work_related_roles": "Non-work related roles",
+  "tldr_version": "This is the 'TL;DR' of my resume, for my complete resume I would like to refer you to LinkedIn or my resume site."
 }

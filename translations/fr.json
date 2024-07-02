@@ -21,6 +21,8 @@
   "email": "Email",
   "website": "Site Web",
   "download_resume": "Télécharger le CV",
+  "download_full_1page": "Télécharger la version complète ou 1 page",
   "more_work_related": "Plus d'expérience professionnelle peut être trouvée sur ma page LinkedIn",
-  "non_work_related_roles": "Rôles non professionnels"
+  "non_work_related_roles": "Rôles non professionnels",
+  "tldr_version": "Ceci est le 'TL;DR' de mon CV, pour mon CV complet j'aimerais vous référer à LinkedIn ou à mon site de CV."
 }

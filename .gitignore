@@ -1,4 +1,5 @@
 config/*
+!config/analytics_sample.txt
 !config/cloudconvert_sample.txt
 
 output/*

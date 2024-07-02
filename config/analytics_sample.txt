@@ -1,0 +1,5 @@
+# If you need analytics in the head create a analytics_head.txt
+# If you need analytics just befor </body> create a analytics_bodyend.txt
+# You can use both at the same time.
+
+<script defer src="https://cloud.umami.is/script.js" data-website-id="XXXXXXX-XXXXXXX-XXXXXXX-XXXXXX-XXXXXX"></script>
