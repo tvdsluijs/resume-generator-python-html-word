@@ -322,8 +322,10 @@
                                 class="small"
                             />
                             <div class="list-item__content">
+                                <h3 class="list-item__title">{{ job.position }}</h3>
                                 <h4 class="list-item__title">
-                                    {{ job.name }}, {{ job.location }} {% if
+                                    {{ job.name }}, {{ job.location }}
+                                    {% if
                                     job.url %}
                                     <a
                                         href="{{ job.url }}"
