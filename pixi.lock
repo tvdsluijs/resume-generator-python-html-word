@@ -10,6 +10,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ca-certificates-2024.6.2-hf0a4a13_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/certifi-2024.6.2-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/charset-normalizer-3.3.2-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/css-html-js-minify-2.5.5-py312h81bd7bf_8.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/docx-mailmerge-0.5.0-pyhd8ed1ab_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/icu-73.2-hc8870d7_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/idna-3.7-pyhd8ed1ab_0.conda
@@ -109,6 +110,23 @@ packages:
   license_family: MIT
   size: 46597
   timestamp: 1698833765762
+- kind: conda
+  name: css-html-js-minify
+  version: 2.5.5
+  build: py312h81bd7bf_8
+  build_number: 8
+  subdir: osx-arm64
+  url: https://conda.anaconda.org/conda-forge/osx-arm64/css-html-js-minify-2.5.5-py312h81bd7bf_8.conda
+  sha256: b43901baa18329c089acd6052fe435b7ac8bc84ac50dbb3c9407a2f22b750f81
+  md5: 5bcd75688e39c1fbec28be5f7d51c45a
+  depends:
+  - python >=3.12,<3.13.0a0
+  - python >=3.12,<3.13.0a0 *_cpython
+  - python_abi 3.12.* *_cp312
+  license: GPL-3.0-only
+  license_family: LGPL
+  size: 51107
+  timestamp: 1696790932792
 - kind: conda
   name: docx-mailmerge
   version: 0.5.0

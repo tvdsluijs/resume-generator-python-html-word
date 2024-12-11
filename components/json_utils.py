@@ -34,6 +34,6 @@ def generate_hreflang_links(basics, languages, default_language):
     }
 
     # Add the x-default link
-    hreflang_links["x-default"] = f"{base_url}/index.html"
+    hreflang_links["xdefault"] = f"{base_url}/index.html"
 
     return hreflang_links

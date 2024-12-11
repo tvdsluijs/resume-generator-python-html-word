@@ -9,6 +9,7 @@ from components.downloads import generate_downloads
 from components.pdf_resume import generate_pdf_resume
 from components.read_config import read_config_file
 from components.cloudconvert_to_pdf import convert_to_pdf
+from components.minimize_js_css import minimize_css, minimize_js
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -89,6 +90,12 @@ def main():
             generate_word_resume(data, translations, word_output_path, False)
             generate_word_resume(data, translations, word_output_tldr_path, True)
 
+            #let do some minization for css and js File
+            js_file = os.path.join(output_dir, "script.js")
+            css_file = os.path.join(output_dir, "style.css")
+            minimize_css(css_file)
+            minimize_js(js_file)
+
             # Generate PDF with cloudconvert API you need to pay for the API
             # First read api from config file
             # cloudconvert_api = read_config_file("config/cloudconvert.txt")
@@ -96,6 +103,7 @@ def main():
 
             # OR use Generate PDF resume (not possible on Mac OS M1/M2/M3/Mx CPUs)
             # generate_pdf_resume(language:str = ""):
+
 
 if __name__ == "__main__":
     main()

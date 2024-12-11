@@ -24,14 +24,18 @@ def generate_downloads(language: str = "", word: bool = False, pdf: bool = False
         download = {
             'url': f"{language}_resume.docx",
             'name': f"{language} MS-Word resume",
-            'icon': 'word.svg'
+            'icon': 'word.svg',
+            'width': '24px',
+            'height': '42px'
         }
         downloads.append(download)
         if tldr:
             download = {
                 'url': f"{language}_resume_tldr.docx",
                 'name': f"{language} MS-Word 1 page resume",
-                'icon': 'word-1p.svg'
+                'icon': 'word-1p.svg',
+                'width': '24px',
+                'height': '32px'
             }
             downloads.append(download)
     # If the PDF option is selected, add the PDF resume link to the list
@@ -39,14 +43,18 @@ def generate_downloads(language: str = "", word: bool = False, pdf: bool = False
         download = {
             'url': f"{language}_resume.pdf",
             'name': f"{language} PDF resume",
-            'icon': 'pdf.svg'
+            'icon': 'pdf.svg',
+            'width': '32px',
+            'height': '32px'
         }
         downloads.append(download)
         if tldr:
             download = {
                 'url': f"{language}_resume_tldr.pdf",
                 'name': f"{language} PDF 1 page resume",
-                'icon': 'pdf-1p.svg'
+                'icon': 'pdf-1p.svg',
+                'width': '32px',
+                'height': '32px'
             }
             downloads.append(download)
     return downloads  # Return the list of download links

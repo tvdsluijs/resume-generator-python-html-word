@@ -1,6 +1,7 @@
 @font-face {
     font-family: gothic;
     src: url(fonts/gothic.woff);
+    font-display: swap;
 }
 
 :root {
@@ -9,9 +10,11 @@
     --light-text-color: #ababab;
     --dark-text-color: #333;
     --border-color: #5a5a5a;
-    --blue-word-color: #548ab7;
+    --blue-word-color: #436786;
+    --light_blue: #03a9f4;
     /* --side-bar-color: #f5f4f4; */
     --side-bar-color: #ededed;
+    --light-color: #fff;
     --line-height: 24.19px;
     --box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
     --font-size-small: 0.8em;
@@ -47,7 +50,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #0077b5;
+    color: var(--blue-word-color);
     /* Adjust hover color as desired */
     text-decoration: none;
     /* Ensure no underline on hover/focus */
@@ -82,7 +85,7 @@ a:focus {
 .profile-wrapper {
     flex-basis: 26%;
     border-top-left-radius: 70px;
-    background-color: #fff;
+    background-color: var(--light-color);
     overflow: hidden;
     display: flex;
     z-index: 3;
@@ -111,7 +114,7 @@ a:focus {
     width: 330px;
     transition: all 1s ease-in-out;
     z-index: 999999;
-    border: 8px solid #548ab7;
+    border: 8px solid var(--blue-word-color);
 }
 
 @keyframes morph {
@@ -171,7 +174,6 @@ a:focus {
     margin: 0;
     padding-bottom: 16px;
     text-transform: uppercase;
-    font-weight: 700;
 }
 
 .heading-light {
@@ -238,7 +240,7 @@ address {
 .resume {
     padding: 25px 30px;
     flex-basis: 74%;
-    background-color: #fff;
+    background-color: var(--light-color);
 }
 
 .resume-wrap {
@@ -316,7 +318,7 @@ address {
     display: inline-block;
     font-size: var(--font-size-medium);
     text-transform: uppercase;
-    color: #808080;
+    color: var(--light-text-color);
     margin-bottom: 30px;
 }
 
@@ -331,12 +333,11 @@ address {
 
 .about-contacts__link {
     text-decoration: none;
-    color: #777777;
+    color: var(--light-text-color);
 }
 
 /* Intro Section */
 .intro {
-    /* border-bottom: 2px dashed #ececec; */
     margin-bottom: 35px;
 }
 
@@ -362,7 +363,6 @@ address {
     padding-left: 15px;
     padding-bottom: 30px;
     margin-bottom: 20px;
-    /* border-bottom: 2px dashed #ececec; */
     display: flex;
     align-items: flex-start;
 }
@@ -380,7 +380,7 @@ address {
 
 .list-item__text {
     font-size: var(--font-size-medium);
-    color: #777;
+    color: var(--dark-text-color);
 }
 
 .list-item_non-border {
@@ -444,7 +444,7 @@ address {
     left: 0;
     top: 0;
     height: 100%;
-    background-color: #898989;
+    background-color: var(--light-text-color);
 }
 
 .level-80:before {
@@ -524,7 +524,7 @@ address {
         content: "";
         width: 100%;
         height: 150px;
-        background-color: #03a9f4;
+        background-color: var(--light_blue);
         display: block;
         position: absolute;
     }
@@ -625,7 +625,7 @@ footer {
     align-items: center;
     max-width: 1366px;
     font-size: 0.8em;
-    background-color: #ffffff;
+    background-color: var(--light-color);
     margin: 20px auto;
     box-shadow: var(--box-shadow);
     text-align: center;
@@ -719,7 +719,7 @@ footer p {
     display: none;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: var(--light-color);
 }
 
 .reference-text {
@@ -759,4 +759,53 @@ footer p {
 .small-text {
     margin-top: 5px !important;
     font-size: 0.8em;
+}
+
+.left_spaced {
+    margin: 0 50px;
+}
+
+.bg,
+.button {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+}
+
+.bg {
+    animation: pulse 1.4s ease infinite;
+    background: var(--blue-word-color);
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 99;
+    border: none;
+    background: var(--blue-word-color);
+    background-size: 18px;
+    cursor: pointer;
+    outline: none;
+}
+
+.button a {
+    position: absolute;
+    color: var(--light-color);
+    font-size: 22px;
+    text-decoration: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }

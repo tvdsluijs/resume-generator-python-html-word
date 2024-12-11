@@ -39,12 +39,14 @@
         />
         <meta name="twitter:image" content="{{ basics.image }}" />
         {{analytics.head}}
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style_min.css" />
 
         <!-- Hreflang Links -->
-        <link rel="alternate" hreflang="x-default" href="index.html" />
+        <link rel="alternate" hreflang="x-default" href="{{hreflang_links.xdefault}}" />
         {% for lang_code, url in hreflang_links.items() %}
-        <link rel="alternate" hreflang="{{ lang_code }}" href="{{ url }}" />
+            {% if lang_code not in ("x-default", "xdefault")  %}
+                <link rel="alternate" hreflang="{{ lang_code }}" href="{{ url }}" />
+            {% endif %}
         {% endfor %}
 
         <!-- Favicon and Icons -->
@@ -181,7 +183,9 @@
                                     <img
                                         src="icons/phone.svg"
                                         alt="phone number"
-                                        class="xxsmall" />
+                                        class="xxsmall"
+                                        width="16px"
+                                        height="16px />
                                     <a
                                         href="tel:{{ basics.phone }}"
                                         class="contacts-text"
@@ -196,7 +200,9 @@
                                     <img
                                         src="icons/email.svg"
                                         alt="email"
-                                        class="xxsmall" />
+                                        class="xxsmall"
+                                        width="16px"
+                                        height="16px"/>
                                     <a
                                         href="mailto:{{ basics.email }}"
                                         class="contacts-text"
@@ -211,7 +217,9 @@
                                     <img
                                         src="icons/internet.svg"
                                         alt="internet link"
-                                        class="xxsmall" />
+                                        class="xxsmall"
+                                        width="16px"
+                                        height="16px />
                                     <a
                                         href="{{ basics.url }}"
                                         class="contacts-text"
@@ -234,7 +242,7 @@
                                     title="{{ profile.network }}"
                                     data-umami-event="Social click {{ profile.network }}"
                                     alt="{{ profile.network }}">
-                                        <img src="icons/{{ profile.icon }}" class"xsmall" alt="{{ profile.network }}" />
+                                        <img src="icons/{{ profile.icon }}" class"xsmall" width="32px" height="32px" alt="{{ profile.network }}" />
                                     </a>
                                 {% endfor %}
                             </div>
@@ -251,9 +259,9 @@
                                     target="_blank"
                                     title="{{ download.name }}"
                                     data-umami-event="Download click {{ download.name }}"
-                                    alt="{{ download.name }}"
+                                    alt="Download {{ download.name }}"
                                     >
-                                    <img src="icons/{{ download.icon }}" class"" alt="{{ download.name }}" />
+                                    <img src="icons/{{ download.icon }}" height="{{download.height}}" width="{{download.width}}" alt="{{ download.name }}" />
                                     </a>
                                 {% endfor %}
                             </div>
@@ -320,6 +328,8 @@
                                 src="icons/network-wired.svg"
                                 alt="Job"
                                 class="small"
+                                width="40px"
+                                height="32px"
                             />
                             <div class="list-item__content">
                                 <h3 class="list-item__title">{{ job.position }}</h3>
@@ -335,9 +345,10 @@
                                         <!-- <i class="fa-solid fa-link"></i> -->
                                         <img
                                             src="icons/link.svg"
-                                            alt="Link to jobsite"
+                                            alt="Url to {{ job.name }}"
                                             class="xxsmall"
-                                        />
+                                            width="16px"
+                                            height="13px">
                                     </a>
                                     {% endif %}
                                 </h4>
@@ -368,11 +379,13 @@
                             <img
                                 src="icons/education.svg"
                                 alt="Education"
-                                class="small" />
+                                class="small"
+                                width="40px"
+                                height="32px" />
                             <div class="list-item__content">
-                                <h4 class="list-item__title">
+                                <h3 class="list-item__title">
                                     {{ edu.institution }}
-                                </h4>
+                                </h3>
                                 <span class="list-item__date"
                                     >{{ edu.startDate }} – {{ edu.endDate or
                                     translations.present }}</span
@@ -417,6 +430,9 @@
                                     class="certificates-list__item"
                                     src="{{ cert.image }}"
                                     alt="{{ cert.name }}"
+                                    width="150px"
+                                    height="150px"
+                                    loading="lazy"
                                 />
                             </a>
                             {% else %}
@@ -424,6 +440,9 @@
                                 class="certificates-list__item"
                                 src="{{ cert.image }}"
                                 alt="{{ cert.name }}"
+                                width="150px"
+                                height="150px"
+                                loading="lazy"
                             />
                             {% endif %} {% endfor %}
                         </div>
@@ -440,19 +459,23 @@
                             <img
                                 src="icons/hobby.svg"
                                 alt="hobby projects"
-                                class="small" />
+                                class="small"
+                                width="40px"
+                                height="32px" />
                             <div class="list-item__content">
-                                <h4 class="list-item__title">
+                                <h3 class="list-item__title">
                                     {{ project.name }} {% if project.url %}
                                     <a href="{{ project.url }}" target="_blank">
                                         <!-- <i class="fa-solid fa-link"></i> -->
                                         <img
                                             src="icons/link.svg"
-                                            alt="building"
-                                            class="xxsmall">
+                                            alt="Url to {{ project.name }}"
+                                            class="xxsmall"
+                                            width="16px"
+                                            height="13px">
                                     </a>
                                     {% endif %}
-                                </h4>
+                                </h3>
                                 <p class="list-item__text">
                                     {{ project.summary}}
                                 </p>
@@ -473,19 +496,23 @@
                             <img
                                 src="icons/volunteer.svg"
                                 alt="volunteer projects"
-                                class="small" />
+                                class="small"
+                                width="40px"
+                                height="32px"/>
                             <div class="list-item__content">
-                                <h4 class="list-item__title">
+                                <h3 class="list-item__title">
                                     {{ vol.organization }} - {{ vol.position }}
                                     {% if vol.url %}
                                     <a href="{{ vol.url }}" target="_blank">
                                         <img
                                             src="icons/link.svg"
-                                            alt="volunteer"
-                                            class="xxsmall">
+                                            alt="Url to {{ vol.organization }}"
+                                            class="xxsmall"
+                                            width="16px"
+                                            height="13px">
                                     </a>
                                     {% endif %}
-                                </h4>
+                                </h3>
                                 <span class="list-item__date"
                                     >{{ vol.startDate }} – {{ vol.endDate or
                                     translations.present }}</span
@@ -535,7 +562,7 @@
                 Python</a
             >. <p>
             {% for lang_code, url in hreflang_links.items() %}
-                {% if lang_code != "x-default" %}
+                {% if lang_code not in ("x-default", "xdefault")  %}
                     {% set flag_code = lang_code %}
                     {% if lang_code == "hi" %}
                         {% set flag_code = "in" %}
@@ -547,7 +574,8 @@
                     <a href="{{ url }}" title="{{ lang_code }}" data-umami-event="Flag click {{ lang_code }}">
                         <img
                             src="flags/{{ flag_code }}.svg"
-                            alt="{{ translations.resume }} {{ translations.resume }}: {{ lang_code }}"
+                            alt="{{ translations.resume }}: {{ lang_code }}"
+                            loading="lazy"
                         />
                     </a>
                 {% elif "en" not in hreflang_links %}
@@ -557,6 +585,7 @@
                                 src="flags/{{ flag_code }}.svg"
                                 alt="{{ translations.resume }} {{ translations.language }}: {{ lang_code }}"
                                 style="width: 24px; height: 24px; margin: 0 5px"
+                                loading="lazy"
                             />
                         </a>
                 {% endif %}
